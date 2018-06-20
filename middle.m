@@ -1,27 +1,15 @@
-function out=middle(x)
+function out=middle(x,y)
 [a,b]=size(x);
 out=zeros(a,b);
-mid=zeros(9,1);
+% mid=zeros(9,1);
 out=x;
-for i=2:1:a-1
-    for j=2:1:b-1
-        mid(1,1)=x(i,j);
-        mid(2,1)=x(i-1,j);
-        mid(3,1)=x(i,j-1);
-        mid(4,1)=x(i-1,j-1);
-        mid(5,1)=x(i,j+1);
-        mid(6,1)=x(i+1,j);
-        mid(7,1)=x(i+1,j+1);
-        mid(8,1)=x(i+1,j-1);
-        mid(9,1)=x(i-1,j+1);
-        for m=1:1:8
-           if mid(m,1)>mid(m+1,1)
-               c=mid(m,1);
-               mid(m,1)=mid(m+1,1);
-               mid(m+1,1)=c;
-           end
-           
-        end
-        out(i,j)=mid(5,1);
+for i=(y+1)/2:1:a-(y-1)/2
+    for j=(y+1)/2:1:b-(y-1)/2
+        mid=x(i-(y-1)/2:i+(y-1)/2,j-(y-1)/2:j+(y-1)/2);
+        mid=mid(:);
+        
+        mid=sort(mid);
+       
+        out(i,j)=mid((y*y+1)/2,1);
     end
 end
